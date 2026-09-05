@@ -1,0 +1,24 @@
+AI PROMPT LOG — SDET Practical Assignment
+Tool used: Claude 3.5 Sonnet (via GitHub Copilot Chat)
+
+1. "Here is the Autocomplete Form assignment PDF (requirements, HTML structure, FR-01 to FR-05, test environment: Chrome/Windows 10/en-IN/IST). Summarize the requirements into a requirement-analysis doc covering scope, functional deliverables, and the backend data contract."
+
+2. "Identify the top 10 test scenarios for this Autocomplete Form, ranked from highest to lowest risk. For each give a one-line summary, a risk level (Critical/High/Medium/Low), and a one-sentence rationale."
+
+3. "Compare this GET API response against the FR-05 data contract: { account_id, account_email, start_date, end_date, locale, text, suggestion_list, completed }. List every discrepancy: timezone format, locale format, suggestion_list content, and completed data type. Also confirm which fields (e.g., key naming, JSON syntax) are actually correct."
+
+4. "Write at least 8 detailed test cases covering both UI and API behavior for the scenarios above. Each test case needs an ID, title, preconditions, numbered steps, expected results, and test data."
+
+5. "Generate Playwright TypeScript UI tests for the autocomplete form using the Page Object Model. Cover: Tab navigation, Enter to submit, Escape to clear/close suggestions, prefix-based suggestion filtering, suggestion click selection, and success/error message visibility on submit."
+
+6. "Generate a playwright.config.ts for the UI suite that sets locale to en-IN and timezoneId to Asia/Kolkata to match the India/IST test environment described in the assignment."
+
+7. "Write Playwright API tests validating the FR-05 schema: correct snake_case keys, boolean type for completed, IETF BCP 47 locale format (en-IN), ISO-8601 timestamps with +05:30 offset, and suggestion_list containing only matching suggestions. Include at least 2 negative test cases (missing required field, invalid suggestion string)."
+
+8. "Review the generated API test — it used Date.parse() to validate the timestamp, which silently accepts a UTC 'Z' timestamp. Fix it to explicitly assert the +05:30 IST offset with a regex, and add an assertion that every item in suggestion_list starts with the submitted text, since the sample response returned all 3 original suggestions instead of just the selected one."
+
+9. "Write the architecture discussion doc explaining the Page Object Model choice, the isolated API testing approach using Playwright's request context, and why environment config (locale/timezone) is kept separate from test specs."
+
+10. "Write the AI reflection doc: which AI tools were used, what I used them for, at least 2 concrete corrections I made to the AI output with reasoning, and at least 1 concrete limitation/mistake the AI made."
+
+11. "Read through the entire project (docs, tests, package.json, README) and cross-check it against the assignment PDF end-to-end. Fill any gaps — README setup/run instructions, npm scripts, .gitignore — and produce the complete JSON transcript of this AI conversation for submission, since the assignment states submissions without it will be rejected."

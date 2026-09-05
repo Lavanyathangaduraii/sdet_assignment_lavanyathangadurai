@@ -1,0 +1,26 @@
+{
+  "name": "sdet_assignment_lavanyathangadurai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:ui && npm run test:api",
+    "test:ui": "playwright test --config=tests/ui/config/playwright.config.ts",
+    "test:api": "playwright test tests/api/tests",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lavanyathangaduraii/sdet_assignment_lavanyathangadurai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lavanyathangaduraii/sdet_assignment_lavanyathangadurai/issues"
+  },
+  "homepage": "https://github.com/Lavanyathangaduraii/sdet_assignment_lavanyathangadurai#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}

@@ -1,0 +1,65 @@
+<html>
+<head></head>
+<body>
+<div class="form-container">
+<label for="input-field">Enter a value:</label>
+<input type="text" id="input-field" placeholder="Type here...">
+<ul class="suggestions">
+<li>agile methodology</li>
+<li>agile methodology process</li>
+<li>agile methodology process testing</li>
+</ul>
+<button id="next-button">Next</button>
+<span class="error-message" style="display:none;">Error: Invalid input. Please select a valid suggestion.</span>
+<div class="success-container" style="display:none;">
+<p>Success! Your response has been recorded.</p>
+</div>
+</div>
+<script>
+  // Minimal FR-01..FR-04 behavior so this static fixture is executable by the Playwright suite.
+  var KNOWN_SUGGESTIONS = ['agile methodology', 'agile methodology process', 'agile methodology process testing'];
+  var input = document.getElementById('input-field');
+  var list = document.querySelector('ul.suggestions');
+  var items = Array.prototype.slice.call(document.querySelectorAll('ul.suggestions li'));
+  var nextBtn = document.getElementById('next-button');
+  var successBox = document.querySelector('.success-container');
+  var errorBox = document.querySelector('.error-message');
+
+  function filterSuggestions() {
+    var val = input.value.toLowerCase();
+    items.forEach(function (li) {
+      var text = li.textContent.toLowerCase();
+      li.style.display = (val === '' || text.indexOf(val) === 0) ? '' : 'none';
+    });
+  }
+
+  input.addEventListener('input', filterSuggestions);
+
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      list.style.display = 'none';
+    }
+  });
+
+  items.forEach(function (li) {
+    li.addEventListener('click', function () {
+      input.value = li.textContent;
+      filterSuggestions();
+    });
+  });
+
+  function submitForm() {
+    var val = input.value;
+    if (KNOWN_SUGGESTIONS.indexOf(val) !== -1) {
+      successBox.style.display = '';
+      errorBox.style.display = 'none';
+    } else {
+      errorBox.style.display = '';
+      successBox.style.display = 'none';
+    }
+  }
+
+  nextBtn.addEventListener('click', submitForm);
+</script>
+</body>
+</html>
